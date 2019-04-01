@@ -1,6 +1,10 @@
 # CipherSweetBenchmarks
 
-To run benchmarks, install ciphersweet (https://github.com/paragonie/ciphersweet) and type:
+1) install ciphersweet (https://github.com/paragonie/ciphersweet). If you already have PHP installed it needs: 
+
+`composer require paragonie/ciphersweet`
+
+2) run benchmarks:
 
 `php run.php` - with default benchmark parameters.
 
