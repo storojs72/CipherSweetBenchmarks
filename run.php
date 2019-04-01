@@ -18,8 +18,8 @@ ValidateParameter($my_args, "rows", DEFAULT_ROWS_COUNT);
 ValidateParameter($my_args, "requests", DEFAULT_REQUESTS_COUNT);
 ValidateParameter($my_args, "data_length", DEFAULT_DATA_LENGTH_BYTES);
 
-//$directDb = new DirectDbBenchmark($my_args["rows"], $my_args["requests"], $my_args["data_length"]);
-//$directDb->Run();
+$directDb = new DirectDbBenchmark($my_args["rows"], $my_args["requests"], $my_args["data_length"]);
+$directDb->Run();
 
 $cipherSweetDb = new CipherSweetDbBenchmark($my_args["rows"], $my_args["requests"], $my_args["data_length"]);
 $cipherSweetDb->Run();
