@@ -4,7 +4,9 @@
 
 `composer require paragonie/ciphersweet`
 
-2) run benchmarks:
+2) provide PostgreSQL database (I used our docker-compose) with connection string: `host=127.0.0.1 port=5432 dbname=test user=test password=test`
+
+3) run benchmarks:
 
 `php run.php` - with default benchmark parameters.
 
