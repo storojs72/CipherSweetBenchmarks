@@ -5,7 +5,7 @@ const DEFAULT_REQUESTS_COUNT = 1;
 const DEFAULT_DATA_LENGTH_BYTES = 10;
 const BLOOM_FILTER_BIT_LENGTH = 256;
 
-const DB_CONNECTION_STRING="host=127.0.0.1 port=9393 dbname=test user=test password=test";
+const DB_CONNECTION_STRING="host=127.0.0.1 port=5432 dbname=test user=test password=test";
 
 function DropCreateTable($db) {
     if (!pg_query($db, "DROP TABLE IF EXISTS test_raw;")) {
