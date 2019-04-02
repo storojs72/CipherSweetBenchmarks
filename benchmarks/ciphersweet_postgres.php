@@ -57,15 +57,21 @@ class CipherSweetPostgresBenchmark {
             $result = pg_fetch_all($result);
             //Decryption
             foreach ($result as $row) {
-                $decrypted = $encryptedField->decryptValue(hex2bin(substr($row['ciphertext'], 2)));
-                if ($decrypted != $dataUnit)
-                {
-                    throw new Exception("error on decryption occurred");
-                }
+                // simple decryption without any checks
+                $encryptedField->decryptValue(hex2bin(substr($row['ciphertext'], 2)));
             }
         }
         $time_elapsed_secs = microtime(true) - $start;
         printf("SELECT CIPHERSWEET (100%% rows) took %f sec\n", $time_elapsed_secs);
+
+        //Check decrypted results
+        foreach ($result as $row) {
+            $decrypted = $encryptedField->decryptValue(hex2bin(substr($row['ciphertext'], 2)));
+            if ($decrypted != $dataUnit)
+            {
+                throw new Exception("error on decryption occurred");
+            }
+        }
 
         $start = microtime(true);
         for ($i = 0; $i < $this->requests; $i++) {
