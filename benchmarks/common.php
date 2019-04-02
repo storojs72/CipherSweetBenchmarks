@@ -1,6 +1,6 @@
 <?php
 
-const DEFAULT_ROWS_COUNT = 100;
+const DEFAULT_ROWS_COUNT = 1;
 const DEFAULT_REQUESTS_COUNT = 1;
 const DEFAULT_DATA_LENGTH_BYTES = 10;
 const BLOOM_FILTER_BIT_LENGTH = 256;
@@ -44,7 +44,6 @@ function Connect() {
     }
     return $db_connection;
 }
-
 
 function ValidateParameter($args, $param, $defaultValue) {
     if ($args[$param] < 0) {

@@ -1,7 +1,7 @@
 <?php
 include 'common.php';
 
-class DirectDbBenchmark {
+class DirectPostgresBenchmark {
 
     private $rows;
     private $requests;
@@ -16,8 +16,8 @@ class DirectDbBenchmark {
     public function Run() {
         $db = Connect();
         DropCreateTable($db);
-        $singleRow = pg_escape_bytea(random_bytes($this->dataLength));
-        $input = array($singleRow, $singleRow);
+        $singleRow = random_bytes($this->dataLength);
+        $input = array('\x'.bin2hex($singleRow), '\x'.bin2hex($singleRow));
 
         $start = microtime(true);
         for ($i = 0; $i < $this->rows; $i++) {
@@ -29,7 +29,7 @@ class DirectDbBenchmark {
         printf("INSERT DB took %f sec\n", $time_elapsed_secs);
 
 
-        $input = array($singleRow);
+        $input = array('\x'.bin2hex($singleRow));
         $start = microtime(true);
         for ($i = 0; $i < $this->requests; $i++) {
             $result = pg_query_params($db, "SELECT * FROM test_raw WHERE ciphertext=$1", $input);
@@ -56,6 +56,8 @@ class DirectDbBenchmark {
         }
         $time_elapsed_secs = microtime(true) - $start;
         printf("SELECT DB (0%% rows) took %f sec\n", $time_elapsed_secs);
+
+        pg_close($db);
     }
 }
 
